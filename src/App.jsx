@@ -4,6 +4,7 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import SocialBar from "./components/SocialBar";
+import WaterFooter from "./components/WaterFooter";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Services />
       <Contact />
       <SocialBar />
+      <WaterFooter />
     </div>
   );
 }
