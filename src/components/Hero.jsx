@@ -8,15 +8,22 @@ export default function Hero() {
   useEffect(() => {
     const triggerFade = () => {
       setStep(0);
-      setTimeout(() => setStep(1), 100); // H1
-      setTimeout(() => setStep(2), 300); // paragraph
-      setTimeout(() => setStep(3), 500); // button
+      setTimeout(() => setStep(1), 100);
+      setTimeout(() => setStep(2), 300);
+      setTimeout(() => setStep(3), 500);
     };
 
     triggerFade();
     window.addEventListener("heroFade", triggerFade);
     return () => window.removeEventListener("heroFade", triggerFade);
   }, []);
+
+  const handleRequestService = () => {
+    const servicesSection = document.getElementById("services");
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section
@@ -39,7 +46,6 @@ export default function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Hero Card */}
       <div
         className="relative z-10
                    w-full max-w-4xl
@@ -49,7 +55,6 @@ export default function Hero() {
                    bg-white/20 backdrop-blur-xl rounded-3xl
                    shadow-2xl text-center"
       >
-        {/* H1 */}
         <h1
           className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl
                       font-semibold mb-4
@@ -60,7 +65,6 @@ export default function Hero() {
           Imara Analytical Laboratories
         </h1>
 
-        {/* Paragraph */}
         <p
           className={`mb-6 sm:mb-8 text-sm sm:text-base md:text-lg lg:text-xl
                       text-black
@@ -72,9 +76,8 @@ export default function Hero() {
           Soil, Water, Fertilizer, Plant Tissue, Food & Animal Feed Analysis
         </p>
 
-        {/* View Services Button */}
-        <a
-          href="#services"
+        <button
+          onClick={handleRequestService}
           className={`inline-flex items-center justify-center
                      px-6 sm:px-8 md:px-10 py-3 sm:py-4
                      bg-green-600 text-white
@@ -85,8 +88,8 @@ export default function Hero() {
                      transition-all duration-700 ease-out
                      ${step >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
         >
-          View Services
-        </a>
+          Request Service
+        </button>
       </div>
 
       <WaterFooter />
