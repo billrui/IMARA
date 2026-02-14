@@ -5,30 +5,33 @@ export default function SocialBar() {
   const [showIcons, setShowIcons] = useState(false);
 
   useEffect(() => {
-    // Trigger animation after 0.5s delay when page loads
     const timer = setTimeout(() => setShowIcons(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
   const icons = [
-    { icon: <FaFacebookF />, href: "https://facebook.com", bg: "bg-blue-600", hover: "hover:bg-blue-700" },
-    { icon: <FaInstagram />, href: "https://instagram.com", bg: "bg-pink-500", hover: "hover:bg-pink-600" },
-    { icon: <FaWhatsapp />, href: " https://wa.me/254736351633", bg: "bg-green-500", hover: "hover:bg-green-600" },
+    { icon: <FaFacebookF />, href: "https://facebook.com" },
+    { icon: <FaInstagram />, href: "https://instagram.com" },
+    { icon: <FaWhatsapp />, href: "https://wa.me/254736351633" },
   ];
 
   return (
-    <div className="fixed left-0 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-50">
+    <div className="fixed bottom-8 left-6 z-50 flex flex-col gap-4">
       {icons.map((item, index) => (
         <a
           key={index}
           href={item.href}
           target="_blank"
           rel="noopener noreferrer"
-          className={`flex items-center justify-start w-12 pl-2 h-12 rounded-r-full text-white shadow-lg
-                      transform transition-all duration-500 ease-out
-                      ${item.bg} ${item.hover} hover:scale-110
-                      ${showIcons ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"}`}
-          style={{ transitionDelay: `${index * 200}ms` }} // staggered delay
+          className={`w-11 h-11 flex items-center justify-center
+                      rounded-full
+                      bg-white/10 backdrop-blur-md
+                      text-white/80
+                      border border-white/20
+                      transition-all duration-500 ease-out
+                      hover:bg-white hover:text-black hover:scale-110
+                      ${showIcons ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
+          style={{ transitionDelay: `${index * 200}ms` }}
         >
           {item.icon}
         </a>

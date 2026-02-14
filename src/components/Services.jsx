@@ -39,6 +39,25 @@ const serviceData = [
     content:
       "Analysis of animal feeds to determine quality, composition and safety.",
   },
+  // --- NEW SERVICES ---
+  {
+    title: "Compost / Manure Analysis",
+    icon: "fas fa-recycle",
+    content:
+      "Evaluation of organic matter in compost and manure to support sustainable soil management practices.",
+  },
+  {
+    title: "NEMA Effluent Analysis",
+    icon: "fas fa-industry",
+    content:
+      "Environmental discharge testing to ensure compliance with NEMA standards for effluent and wastewater.",
+  },
+  {
+    title: "Research Analysis for University and College",
+    icon: "fas fa-graduation-cap",
+    content:
+      "Advanced analytical support tailored for academic research institutions including universities and colleges.",
+  },
 ];
 
 export default function Services() {
@@ -51,48 +70,37 @@ export default function Services() {
   });
   const [sending, setSending] = useState(false);
 
-  // Toggle service description
   const handleToggle = (index) => setOpenIndex(openIndex === index ? null : index);
-
-  // Open modal form for a service
   const handleRequest = (service) => setModalService(service);
-
-  // Close modal
   const closeModal = () => {
     setModalService(null);
     setFormData({ user_name: "", user_email: "", request_details: "" });
   };
-
-  // Handle input change
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!modalService) return;
 
     setSending(true);
-
     try {
       await send(
-        "service_rapdvl1",       // EmailJS service ID
-        "template_u5kurba",      // EmailJS template ID
+        "service_rapdvl1",
+        "template_u5kurba",
         {
           user_name: formData.user_name,
           user_email: formData.user_email,
-          service_name: modalService.title, // include selected service
+          service_name: modalService.title,
           request_details: formData.request_details,
         },
-        "NwiBom_kjZvpQfXpR"      // public key
+        "NwiBom_kjZvpQfXpR"
       );
-
       alert(`Your request for ${modalService.title} has been sent!`);
       closeModal();
     } catch (error) {
       console.error(error);
       alert("Failed to send request. Please try again later.");
     }
-
     setSending(false);
   };
 
@@ -121,14 +129,12 @@ export default function Services() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {serviceData.map((service, index) => {
             const isOpen = openIndex === index;
-
             return (
               <div
                 key={index}
                 className="bg-white rounded-xl shadow-lg border border-gray-100
                            hover:shadow-2xl hover:border-green-200 transition-all duration-300 overflow-hidden"
               >
-                {/* Service header */}
                 <button
                   onClick={() => handleToggle(index)}
                   className="w-full flex items-center justify-between p-6 text-left hover:bg-green-50 transition-colors duration-300"
@@ -148,7 +154,6 @@ export default function Services() {
                   </span>
                 </button>
 
-                {/* Collapsible content */}
                 <div
                   className={`px-6 overflow-hidden transition-all duration-500 ease-in-out ${
                     isOpen ? "max-h-96 pb-6 opacity-100" : "max-h-0 pb-0 opacity-0"

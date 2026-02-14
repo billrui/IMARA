@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
 
 import Navbar from "./components/Navbar";
@@ -10,14 +10,14 @@ import SocialBar from "./components/SocialBar";
 import WaterFooter from "./components/WaterFooter";
 
 function App() {
+  const heroRef = useRef(null);
 
-  // ⭐ Smooth Scroll Setup (Whole Website + Phones)
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.3,
       smooth: true,
-      smoothTouch: true, // VERY important for mobile
-      touchMultiplier: 1.1
+      smoothTouch: true,
+      touchMultiplier: 1.1,
     });
 
     function raf(time) {
@@ -27,32 +27,17 @@ function App() {
 
     requestAnimationFrame(raf);
 
-    return () => {
-      lenis.destroy();
-    };
+    return () => lenis.destroy();
   }, []);
 
   return (
     <div className="relative">
-      {/* Navbar always visible */}
-      <Navbar />
+      <Hero ref={heroRef} />
 
-      {/* Hero Section */}
-      <Hero />
-
-      {/* About Section */}
       <About />
-
-      {/* Services Section */}
       <Services />
-
-      {/* Contact Section */}
       <Contact />
-
-      {/* Social bar */}
       <SocialBar />
-
-      {/* Water footer / wave effect */}
       <WaterFooter />
     </div>
   );
